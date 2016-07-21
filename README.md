@@ -1,8 +1,16 @@
-## How to use
+## With CocoaPod
 
-Add `SGImageDownloader.swift` in your project. 
+add
 
-After that you can use like
+```
+pod SGImageDownloader
+```
+
+## Manual
+
+copy to `SGImageDownloader.swift/Classes/SGImageDownloader.swift` to your project.
+
+## Usage
 
 ```swift
 cell.imageView?.downloadImage("https://myimageURL")
