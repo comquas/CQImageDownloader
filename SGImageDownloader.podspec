@@ -30,7 +30,7 @@ Simple Async Image Downloader using NSURLSession. Small library and easy to use.
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'SGImageDownloader/Classes/**/*'
+  s.source_files = 'SGImageDownloader/Classes/**'
   
   # s.resource_bundles = {
   #   'SGImageDownloader' => ['SGImageDownloader/Assets/*.png']

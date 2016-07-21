@@ -1,0 +1,1 @@
+ const unsigned char SGImageDownloaderVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:SGImageDownloader  PROJECT:Pods-1" "\n"; const double SGImageDownloaderVersionNumber __attribute__ ((used)) = (double)1.;

@@ -1,0 +1,1 @@
+ const unsigned char Pods_SGImageDownloader_TestsVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:Pods_SGImageDownloader_Tests  PROJECT:Pods-1" "\n"; const double Pods_SGImageDownloader_TestsVersionNumber __attribute__ ((used)) = (double)1.;

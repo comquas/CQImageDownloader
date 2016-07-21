@@ -1,0 +1,10 @@
+framework module Pods_SGImageDownloader_Tests {
+  umbrella header "Pods-SGImageDownloader_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module Pods_SGImageDownloader_Tests.Swift {
+    header "Pods_SGImageDownloader_Tests-Swift.h"
+}

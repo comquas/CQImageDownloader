@@ -1,0 +1,10 @@
+framework module SGImageDownloader {
+  umbrella header "SGImageDownloader-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module SGImageDownloader.__Swift {
+    exclude header "SGImageDownloader-Swift.h"
+}
