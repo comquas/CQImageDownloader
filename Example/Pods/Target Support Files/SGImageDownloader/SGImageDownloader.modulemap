@@ -1,0 +1,6 @@
+framework module SGImageDownloader {
+  umbrella header "SGImageDownloader-umbrella.h"
+
+  export *
+  module * { export * }
+}

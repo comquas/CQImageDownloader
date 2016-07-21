@@ -1,0 +1,16 @@
+PODS:
+  - SGImageDownloader (0.1.0)
+
+DEPENDENCIES:
+  - SGImageDownloader (from `../`)
+
+EXTERNAL SOURCES:
+  SGImageDownloader:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  SGImageDownloader: 69778925bc1cad9b46715b2e1987ed8535da2721
+
+PODFILE CHECKSUM: c3a932f2ab91371bb2f8158a857ed7b1e54fb82d
+
+COCOAPODS: 1.0.1
