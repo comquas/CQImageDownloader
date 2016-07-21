@@ -11,12 +11,17 @@ import UIKit
 
 extension UIImageView {
     
-    func downloadImage(url: String) {
+    func downloadImage(url: String, placeholder: UIImage? = nil) {
+        
+        
+        if let img = placeholder {
+            self.image = img
+        }
         
         let downloader = SGImageDownloader()
-
+        
         downloader.downloadImage(url) { (image, success) in
-
+            
             if (success) {
                 dispatch_async(dispatch_get_main_queue(), {
                     self.image = image
@@ -29,9 +34,9 @@ extension UIImageView {
 }
 
 class SGImageDownloader : NSObject , NSURLSessionDelegate {
- 
-    func downloadImage(url: String, completion:((image: UIImage?,success: Bool) -> Void)?) {
     
+    func downloadImage(url: String, completion:((image: UIImage?,success: Bool) -> Void)?) {
+        
         if url == "" {
             if let callback = completion {
                 callback(image: nil, success: false)
@@ -55,7 +60,7 @@ class SGImageDownloader : NSObject , NSURLSessionDelegate {
             let session = NSURLSession(configuration: NSURLSessionConfiguration.ephemeralSessionConfiguration(), delegate: self, delegateQueue:NSOperationQueue.mainQueue())
             
             let task = session.dataTaskWithRequest(NSURLRequest(URL: imgURL), completionHandler: { (data: NSData?, response: NSURLResponse?, error: NSError?) in
-
+                
                 
                 if let er = error {
                     print(er.localizedDescription)
@@ -82,31 +87,31 @@ class SGImageDownloader : NSObject , NSURLSessionDelegate {
             })
             
             task.resume()
-
+            
         }
- 
- 
- 
- 
+        
+        
+        
+        
     }
     func deleteCacheImage(url: String) {
- 
+        
         if let path = self.imagePathAtURL(url) {
-        let fManager = NSFileManager.defaultManager()
-        if fManager.fileExistsAtPath(path) {
-            do {
-                try fManager.removeItemAtPath(path)
+            let fManager = NSFileManager.defaultManager()
+            if fManager.fileExistsAtPath(path) {
+                do {
+                    try fManager.removeItemAtPath(path)
+                }
+                catch {
+                    print ("delete image error")
+                }
             }
-            catch {
-                print ("delete image error")
-            }
-        }
         }
         
     }
     func saveImage(data: NSData, name: String) {
         if let file = self.imagePathAtURL(name) {
-        
+            
             do {
                 try data.writeToFile(file, options: .AtomicWrite)
                 
@@ -141,7 +146,7 @@ class SGImageDownloader : NSObject , NSURLSessionDelegate {
             if(!NSFileManager.defaultManager().fileExistsAtPath(cacheFolder as String, isDirectory: &directory)) {
                 if (!directory) {
                     do {
-                    try NSFileManager.defaultManager().createDirectoryAtPath(cacheFolder as String, withIntermediateDirectories: true, attributes: nil)
+                        try NSFileManager.defaultManager().createDirectoryAtPath(cacheFolder as String, withIntermediateDirectories: true, attributes: nil)
                     }
                     catch {
                         print("folder create error")
@@ -151,9 +156,19 @@ class SGImageDownloader : NSObject , NSURLSessionDelegate {
             }
         }
         
-        return cacheFolder.stringByAppendingPathComponent("\(url.md5()).jpg")
-
+        let imageURL = changeURL(url)
+        
+        return cacheFolder.stringByAppendingPathComponent("\(imageURL).jpg")
+        
     }
+    
+    private func changeURL(url: String) -> String {
+        var returnUrl = url.stringByReplacingOccurrencesOfString(" ", withString: "_")
+        returnUrl = returnUrl.stringByReplacingOccurrencesOfString(".", withString: "_")
+        returnUrl = returnUrl.stringByReplacingOccurrencesOfString(":", withString: "_")
+        return returnUrl
+    }
+    
     
     func clearAllTheCachedImages() {
         
