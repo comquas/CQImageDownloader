@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 extension UIImageView {
     
     func downloadImage(url: String, placeholder: UIImage? = nil) {
@@ -163,10 +162,7 @@ class SGImageDownloader : NSObject , NSURLSessionDelegate {
     }
     
     private func changeURL(url: String) -> String {
-        var returnUrl = url.stringByReplacingOccurrencesOfString(" ", withString: "_")
-        returnUrl = returnUrl.stringByReplacingOccurrencesOfString(".", withString: "_")
-        returnUrl = returnUrl.stringByReplacingOccurrencesOfString(":", withString: "_")
-        return returnUrl
+        return "\(url.hashValue)"
     }
     
     
