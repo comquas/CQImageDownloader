@@ -155,14 +155,10 @@ class SGImageDownloader : NSObject , NSURLSessionDelegate {
             }
         }
         
-        let imageURL = changeURL(url)
+        let imageURL = "\(url.hashValue)"
         
         return cacheFolder.stringByAppendingPathComponent("\(imageURL).jpg")
         
-    }
-    
-    private func changeURL(url: String) -> String {
-        return "\(url.hashValue)"
     }
     
     
