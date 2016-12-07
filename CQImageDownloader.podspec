@@ -25,7 +25,7 @@ Simple Async Image Downloader using NSURLSession. Small library and easy to use.
   
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Saturngod' => 'saturngod@gmail.com' }
-  s.source           = { :git => 'https://github.com/saturngod/SGImageDownloader.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/comquas/CQImageDownloader.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '8.0'
 
