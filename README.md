@@ -3,15 +3,56 @@
 add
 
 ```
-pod SGImageDownloader
+pod CQImageDownloader
 ```
 
 ## Manual
 
-copy to `SGImageDownloader.swift/Classes/SGImageDownloader.swift` to your project.
+copy to `CQImageDownloader/Classes/CQImageDownloader.swift` to your project.
 
 ## Usage
 
+### Download and Show
+
 ```swift
-cell.imageView?.downloadImage("https://myimageURL")
+imageView.setCQImage("https://unsplash.com/photos/BO5BswJwguI/download?force=true")
+```
+
+```swift
+imageView.setCQImage("https://unsplash.com/photos/BO5BswJwguI/download?force=true", placeholder: placeholderImage)
+```
+
+### Downloading with progress
+
+```swift
+imageView.setCQImage("https://unsplash.com/photos/BO5BswJwguI/download?force=true", placeholder: nil, progress: { (value: Float) in
+
+    //supporting progress        
+    print(value)
+            
+})
+
+```
+
+### Downloading with completion
+
+```swift
+imageView.setCQImage("https://unsplash.com/photos/BO5BswJwguI/download?force=true", placeholder: nil, progress: nil, completion: { (image:UIImage?, success:Bool) in
+
+    if (success) {
+
+    }
+
+})
+```
+
+### Clear Cache
+
+```swift
+CQImageDownloader.clearAllTheCachedImages()
+```
+
+```swift
+var downloader = CQImageDownloader()
+downloader.deleteCacheImage("file URL")
 ```
