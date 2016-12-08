@@ -210,7 +210,7 @@ public class CQImageDownloader: NSObject {
 extension CQImageDownloader: URLSessionDelegate {
     
     
-    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void)
+    public func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void)
     {
         
         completionHandler(Foundation.URLSession.AuthChallengeDisposition.useCredential, URLCredential(trust: challenge.protectionSpace.serverTrust!))
@@ -222,14 +222,14 @@ extension CQImageDownloader: URLSessionDelegate {
 
 extension CQImageDownloader: URLSessionDownloadDelegate {
     
-    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+    public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         
         if let err = error, let callback = completionCallback {
             print(err.localizedDescription)
             callback(nil,false)
         }
     }
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+    public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         
         if let file = self.imagePathAtURL(self.downloadImageURL) {
             
@@ -262,7 +262,7 @@ extension CQImageDownloader: URLSessionDownloadDelegate {
     }
     
     
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+    public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
         
         let progress = Float(totalBytesWritten)/Float(totalBytesExpectedToWrite)
         if let callback = self.progressCallback {

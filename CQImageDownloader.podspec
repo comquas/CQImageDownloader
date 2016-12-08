@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'CQImageDownloader'
-  s.version          = '0.3'
+  s.version          = '0.4'
   s.summary          = 'Simple Async Image Downloader with progress'
 
 # This description is used to generate tags and improve search results.
