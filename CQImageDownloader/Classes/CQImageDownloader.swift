@@ -61,7 +61,7 @@ extension UIImageView {
     
 }
 
-class CQImageDownloader: NSObject {
+public class CQImageDownloader: NSObject {
     
     
     var downloadTask: URLSessionDownloadTask!
