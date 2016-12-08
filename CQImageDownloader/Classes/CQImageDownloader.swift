@@ -11,29 +11,29 @@ import UIKit
 extension UIImageView {
     
     
-    func setCQImage(_ url:String) {
+    public func setCQImage(_ url:String) {
         self.setCQImage(url, placeholder: nil, progress: nil, completion: nil)
     }
     
-    func setCQImage(_ url:String, placeholder: UIImage?) {
+    public func setCQImage(_ url:String, placeholder: UIImage?) {
         self.setCQImage(url, placeholder: placeholder, progress: nil, completion: nil)
     }
     
-    func setCQImage(_ url: String, progress:((Float) -> Void)?) {
+    public func setCQImage(_ url: String, progress:((Float) -> Void)?) {
         self.setCQImage(url, placeholder: nil, progress: progress, completion: nil)
     }
     
-    func setCQImage(_ url:String, placeholder: UIImage?, progress:((Float) -> Void)?) {
+    public func setCQImage(_ url:String, placeholder: UIImage?, progress:((Float) -> Void)?) {
         self.setCQImage(url, placeholder: placeholder, progress: progress, completion: nil)
     }
     
-    func setCQImage(_ url: String, progress:((Float) -> Void)?,completion:((UIImage?,Bool) -> Void)?) {
+    public func setCQImage(_ url: String, progress:((Float) -> Void)?,completion:((UIImage?,Bool) -> Void)?) {
         
         self.setCQImage(url, placeholder: nil, progress: progress, completion: completion)
         
     }
     
-    func setCQImage(_ url: String, placeholder: UIImage?, progress:((Float) -> Void)?,completion:((UIImage?,Bool) -> Void)?) {
+    public func setCQImage(_ url: String, placeholder: UIImage?, progress:((Float) -> Void)?,completion:((UIImage?,Bool) -> Void)?) {
         
         
         if let img = placeholder {
@@ -71,7 +71,7 @@ class CQImageDownloader: NSObject {
     var completionCallback: ((UIImage?,Bool) -> Void)?
     var progressCallback: ((Float) -> Void)?
     
-    func downloadImageWithProgress(_ url: String,  progress:((Float) -> Void)?, completion:((UIImage?,Bool) -> Void)?) {
+    public func downloadImageWithProgress(_ url: String,  progress:((Float) -> Void)?, completion:((UIImage?,Bool) -> Void)?) {
         
         
         if url == "" {
@@ -109,7 +109,7 @@ class CQImageDownloader: NSObject {
     }
     
     
-    func deleteCacheImage(_ url: String) {
+    public func deleteCacheImage(_ url: String) {
         
         if let path = self.imagePathAtURL(url) {
             let fManager = FileManager.default
@@ -188,7 +188,7 @@ class CQImageDownloader: NSObject {
     }
     
     
-    static func clearAllTheCachedImages() {
+    public static func clearAllTheCachedImages() {
         
         let documentDir: NSString = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
         let cachedFolder = documentDir.appendingPathComponent("cached")
