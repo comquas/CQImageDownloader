@@ -97,8 +97,9 @@ public class CQImageDownloader: NSObject {
         if let imgURL = URL(string:url)
         {
             
+            let identifier = "\(self.urlHash(url))\(self.randomString(length: 4))"
             
-            let backgroundSessionConfiguration = URLSessionConfiguration.background(withIdentifier: self.urlHash(url))
+            let backgroundSessionConfiguration = URLSessionConfiguration.background(withIdentifier: identifier)
             
             backgroundSession = URLSession(configuration: backgroundSessionConfiguration, delegate: self, delegateQueue: OperationQueue.main)
             
@@ -203,6 +204,21 @@ public class CQImageDownloader: NSObject {
     }
     
     
+    func randomString(length: Int) -> String {
+        
+        let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        let len = UInt32(letters.length)
+        
+        var randomString = ""
+        
+        for _ in 0 ..< length {
+            let rand = arc4random_uniform(len)
+            var nextChar = letters.character(at: Int(rand))
+            randomString += NSString(characters: &nextChar, length: 1) as String
+        }
+        
+        return randomString
+    }
     
 }
 
