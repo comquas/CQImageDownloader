@@ -3,7 +3,7 @@
 add
 
 ```
-pod CQImageDownloader
+pod "CQImageDownloader"
 ```
 
 ## Manual
