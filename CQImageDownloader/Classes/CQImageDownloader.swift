@@ -37,7 +37,7 @@ extension UIImageView {
         
         
         
-        self.image = img
+        self.image = placeholder
         
         
         let downloader = CQImageDownloader()
