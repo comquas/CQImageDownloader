@@ -36,9 +36,9 @@ extension UIImageView {
     public func setCQImage(_ url: String, placeholder: UIImage?, progress:((Float) -> Void)?,completion:((UIImage?,Bool) -> Void)?) {
         
         
-        if let img = placeholder {
-            self.image = img
-        }
+        
+        self.image = img
+        
         
         let downloader = CQImageDownloader()
         
