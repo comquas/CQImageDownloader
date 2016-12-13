@@ -10,30 +10,86 @@ import UIKit
 
 extension UIImageView {
     
-    
-    public func setCQImage(_ url:String) {
-        self.setCQImage(url, placeholder: nil, progress: nil, completion: nil)
+    /**
+     set image url and it will download automatically
+     
+     - parameters:
+        - url: Download Image URL
+     - returns:
+     `CQImageDownloader` for pause,cancel the download
+     */
+    public func setCQImage(_ url:String) -> CQImageDownloader {
+        return self.setCQImage(url, placeholder: nil, progress: nil, completion: nil)
     }
     
-    public func setCQImage(_ url:String, placeholder: UIImage?) {
-        self.setCQImage(url, placeholder: placeholder, progress: nil, completion: nil)
+    /**
+     set image url and it will download automatically
+     - parameters:
+        - url: Download Image URL
+        - placeholder: Before downloading image , showing the placeholder
+     - returns:
+     `CQImageDownloader` for pause,cancel the download
+     */
+    
+    public func setCQImage(_ url:String, placeholder: UIImage?) -> CQImageDownloader {
+       return self.setCQImage(url, placeholder: placeholder, progress: nil, completion: nil)
     }
     
-    public func setCQImage(_ url: String, progress:((Float) -> Void)?) {
-        self.setCQImage(url, placeholder: nil, progress: progress, completion: nil)
+    /**
+     set image url and it will download automatically
+     - parameters:
+        - url: Download Image URL
+        - progress: Callback function for progress. It will include Float value 0 to 1.
+     - returns:
+     `CQImageDownloader` for pause,cancel the download
+     */
+    
+    public func setCQImage(_ url: String, progress:((_ value: Float) -> Void)?) -> CQImageDownloader {
+        return self.setCQImage(url, placeholder: nil, progress: progress, completion: nil)
     }
     
-    public func setCQImage(_ url:String, placeholder: UIImage?, progress:((Float) -> Void)?) {
-        self.setCQImage(url, placeholder: placeholder, progress: progress, completion: nil)
+    /**
+     set image url and it will download automatically
+     - parameters:
+        - url: Download Image URL
+        - placeholder: Before downloading image , showing the placeholder
+        - progress: Callback function for progress. It will include Float value 0 to 1.
+     - returns:
+     `CQImageDownloader` for pause,cancel the download
+     */
+    
+    public func setCQImage(_ url:String, placeholder: UIImage?, progress:((_ value: Float) -> Void)?) -> CQImageDownloader {
+        return self.setCQImage(url, placeholder: placeholder, progress: progress, completion: nil)
     }
     
-    public func setCQImage(_ url: String, progress:((Float) -> Void)?,completion:((UIImage?,Bool) -> Void)?) {
+    /**
+     set image url and it will download automatically
+     - parameters:
+        - url: Download Image URL
+        - placeholder: Before downloading image , showing the placeholder
+        - progress: Callback function for progress. It will include Float value 0 to 1.
+     - returns:
+     `CQImageDownloader` for pause,cancel the download
+     */
+    
+    public func setCQImage(_ url: String, progress:((_ value: Float) -> Void)?,completion:((UIImage?,Bool) -> Void)?) -> CQImageDownloader {
         
-        self.setCQImage(url, placeholder: nil, progress: progress, completion: completion)
+        return self.setCQImage(url, placeholder: nil, progress: progress, completion: completion)
         
     }
     
-    public func setCQImage(_ url: String, placeholder: UIImage?, progress:((Float) -> Void)?,completion:((UIImage?,Bool) -> Void)?) {
+    /**
+     set image url and it will download automatically
+     - parameters:
+        - url: Download Image URL
+        - placeholder: Before downloading image , showing the placeholder
+        - progress: Callback function for progress. It will include Float value 0 to 1.
+        - completion: Callback function , it will call when download finish. Value will include image:UIImage? and success:Bool
+     - returns:
+     `CQImageDownloader` for pause,cancel the download
+     */
+    
+    public func setCQImage(_ url: String, placeholder: UIImage?, progress:((_ value: Float) -> Void)?,completion:((_ image: UIImage?,_ success: Bool) -> Void)?) -> CQImageDownloader {
         
         
         
@@ -57,6 +113,8 @@ extension UIImageView {
             
         })
         
+        return downloader
+        
     }
     
 }
@@ -64,13 +122,21 @@ extension UIImageView {
 public class CQImageDownloader: NSObject {
     
     
-    var downloadTask: URLSessionDownloadTask!
+    var downloadTask: URLSessionDownloadTask?
     var downloadImageURL: String = ""
     var backgroundSession: URLSession!
     
     var completionCallback: ((UIImage?,Bool) -> Void)?
     var progressCallback: ((Float) -> Void)?
     
+    /**
+     Download Image with async
+     - parameters:
+         - url: Download Image URL
+         - placeholder: Before downloading image , showing the placeholder
+         - progress: Callback function for progress. It will include Float value 0 to 1.
+         - completion: Callback function , it will call when download finish. Value will include image:UIImage? and success:Bool
+     */
     public func downloadImageWithProgress(_ url: String,  progress:((Float) -> Void)?, completion:((UIImage?,Bool) -> Void)?) {
         
         
@@ -105,11 +171,15 @@ public class CQImageDownloader: NSObject {
             
             downloadImageURL = url
             downloadTask = backgroundSession.downloadTask(with: imgURL)
-            downloadTask.resume()
+            downloadTask?.resume()
         }
     }
     
-    
+    /**
+     Delete image in cached folder
+     - parameters:
+        - url: Downloaded Image URL
+     */
     public func deleteCacheImage(_ url: String) {
         
         if let path = self.imagePathAtURL(url) {
@@ -125,6 +195,7 @@ public class CQImageDownloader: NSObject {
         }
         
     }
+    
     func saveImage(_ data: Data, name: String) {
         if let file = self.imagePathAtURL(name) {
             
@@ -165,7 +236,7 @@ public class CQImageDownloader: NSObject {
     func imagePathAtURL(_ url: String) -> String? {
         
         var cacheFolder: NSString = ""
-        if let documentDir: NSString = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString? {
+        if let documentDir: NSString = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true)[0] as NSString? {
             cacheFolder = documentDir.appendingPathComponent("cached") as NSString
             var directory: ObjCBool = false
             
@@ -189,9 +260,13 @@ public class CQImageDownloader: NSObject {
     }
     
     
+    /**
+     Clear all image in cached folder of application support directory
+     */
+    
     public static func clearAllTheCachedImages() {
         
-        let documentDir: NSString = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
+        let documentDir: NSString = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true)[0] as NSString
         let cachedFolder = documentDir.appendingPathComponent("cached")
         
         do {
@@ -201,6 +276,34 @@ public class CQImageDownloader: NSObject {
             print ("cannot delete")
         }
         
+    }
+    
+    
+    /**
+     Cancel the image download
+     */
+    
+    public func cancelDownload() {
+        
+        self.downloadTask?.cancel()
+    }
+    
+    /**
+     Pause the image download
+     */
+    
+    public func pauseDownload() {
+        
+        self.downloadTask?.suspend()
+        
+    }
+    
+    /**
+     Resume the image download if suspend
+     */
+    
+    public func resumeDownload() {
+        self.downloadTask?.resume()
     }
     
     

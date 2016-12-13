@@ -2,7 +2,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'CQImageDownloader'
-  s.version          = '0.5.3'
+  s.version          = '0.5.4'
   s.summary          = 'Simple Async Image Downloader with progress'
 
 
